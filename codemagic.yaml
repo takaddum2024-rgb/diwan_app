@@ -2,10 +2,14 @@ workflows:
   flutter-workflow:
     name: Flutter Build
     max_build_duration: 60
+
     environment:
       flutter: stable
 
     scripts:
+      - name: Clean project
+        script: flutter clean
+
       - name: Get dependencies
         script: flutter pub get
 
