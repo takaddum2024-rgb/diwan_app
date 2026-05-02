@@ -1,31 +1,22 @@
-plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("dev.flutter.flutter-gradle-plugin")
-}
-
 android {
-    namespace = "com.example.diwan_app"
-    compileSdk = 34
-
+    compileSdkVersion 34  // ✅ تحديث إلى 34
+    // ✅ حذف buildToolsVersion - سيستخدم Gradle الإصدار الافتراضي
+    
     defaultConfig {
-        applicationId = "com.example.diwan_app"
-        minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId "com.example.app"  // استبدل باسم تطبيقك
+        minSdkVersion 21
+        targetSdkVersion 34  // ✅ تحديث إلى 34
+        versionCode 1
+        versionName "1.0.0"
     }
-
+    
+    // تأكد من وجود هذه الإعدادات
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-
+    
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = '17'
     }
-}
-
-flutter {
-    source = "../.."
 }
