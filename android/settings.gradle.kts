@@ -9,9 +9,9 @@ pluginManagement {
 }
 
 plugins {
-    // قمنا بتحديث الرقم هنا من 8.1.0 إلى 8.1.1
-    id("com.android.application") version "8.3.0" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.22" apply false
+    // استخدمي هذه الإصدارات لضمان التوافق مع Gradle 8.1
+    id("com.android.application") version "8.1.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
     id("dev.flutter.flutter-gradle-plugin") apply false
 }
 
