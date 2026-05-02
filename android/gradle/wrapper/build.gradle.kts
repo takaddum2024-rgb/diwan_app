@@ -7,10 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.diwan_app"
-    compileSdk = 34
-    buildToolsVersion = "34.0.0"
-    ndkVersion = "25.1.8937393"
+   applicationId = "com.example.diwan_app" // يجب أن يطابق الـ namespace
+        minSdk = 21                             // لضمان عمله على الهواتف القديمة والجديدة
+        targetSdk = 34                          // يجب أن يطابق الـ compileSdk
+        versionCode = 1
+        versionName = "1.0"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
