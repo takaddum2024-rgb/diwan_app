@@ -4,16 +4,11 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
-      groups:
-        - default
-      vars:
-        PACKAGE_NAME: "com.example.diwan_app"
       flutter: stable
       java: 17
     scripts:
       - name: Prepare local.properties
         script: |
-          # التأكد من أن المجلد موجود قبل الكتابة فيه
           mkdir -p android
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
@@ -23,8 +18,5 @@ workflows:
       - name: Build Android APK
         script: |
           flutter build apk --release --no-tree-shake-icons
-      - name: Inspect output directory
-        script: |
-          find build/app/outputs -name "*.apk"
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
