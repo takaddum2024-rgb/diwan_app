@@ -18,15 +18,15 @@ dependencies:
   path_provider: ^2.1.1
   
   # حزمة الصوت
-  audioplayers: ^5.2.1
+  audioplayers: ^6.6.0
   
   # باقي الحزم
   provider: ^6.0.5
   shared_preferences: ^2.2.0
   printing: ^5.11.0
   pdf: ^3.10.4
-  share_plus: ^7.2.1
-  file_picker: ^5.5.0
+  share_plus: ^13.1.0
+  file_picker: ^11.0.2
   url_launcher: ^6.2.1
 
 dev_dependencies:
