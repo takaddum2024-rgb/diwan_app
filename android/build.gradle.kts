@@ -1,11 +1,10 @@
 buildscript {
-    val kotlin_version by extra("1.9.0")
+    val kotlin_version by extra("1.9.22")
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        // تحديث أداة بناء الأندرويد لنسخة متوافقة
         classpath("com.android.tools.build:gradle:8.1.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
@@ -18,11 +17,11 @@ allprojects {
     }
 }
 
-val newBuildDir: Directory = rootProject.layout.projectDirectory.dir("../build")
+val newBuildDir = rootProject.layout.buildDirectory.dir("../../build").get().asFile
 rootProject.layout.buildDirectory.set(newBuildDir)
 
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
+    val newSubprojectBuildDir = newBuildDir.resolve(project.name)
     project.layout.buildDirectory.set(newSubprojectBuildDir)
 }
 
