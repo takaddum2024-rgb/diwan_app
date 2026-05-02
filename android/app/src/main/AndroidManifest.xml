@@ -15,7 +15,6 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             
-            <!-- هذا الجزء هو الذي يحل مشكلة الـ V1 Embedding -->
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme"
@@ -27,7 +26,6 @@
             </intent-filter>
         </activity>
 
-        <!-- يخبر Flutter أننا نستخدم النسخة الثانية الحديثة -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
