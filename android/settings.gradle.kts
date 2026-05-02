@@ -1,6 +1,14 @@
 pluginManagement {
-    val flutterSdkPath = System.getProperty("flutter.sdk") ?: System.getenv("FLUTTER_ROOT")
-    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }()
+
+    includeBuild("$flutterSdkPath/dev/gradle_plugin")
+
     repositories {
         google()
         mavenCentral()
@@ -9,10 +17,9 @@ pluginManagement {
 }
 
 plugins {
-    // استخدمي هذه الإصدارات لضمان التوافق مع Gradle 8.1
-    id("com.android.application") version "8.1.0" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
-    id("dev.flutter.flutter-gradle-plugin") apply false
+    id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
+    id "com.android.application" version "8.1.0" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.22" apply false
 }
 
-include(":app")
+include ":app"
