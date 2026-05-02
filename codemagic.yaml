@@ -1,22 +1,23 @@
 workflows:
   android-workflow:
-    name: Android APK Build
-    max_build_duration: 60
+    name: Diwan App Build
     instance_type: mac_mini_m1
+    max_build_duration: 60
     environment:
       flutter: stable
       java: 17
     scripts:
-      - name: Prepare local.properties
+      - name: Prepare Android Environment
         script: |
           mkdir -p android
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
-      - name: Get Flutter packages
+      - name: Get Dependencies
         script: |
           flutter pub get
-      - name: Build Android APK
+      - name: Build Release APK
         script: |
+          flutter clean
           flutter build apk --release --no-tree-shake-icons
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
