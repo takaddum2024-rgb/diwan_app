@@ -1,4 +1,4 @@
-val kotlin_version = "1.9.22"  // 👈 أضف هذا السطر
+val kotlin_version = "1.9.22"
 
 plugins {
     id("com.android.application")
@@ -7,11 +7,18 @@ plugins {
 }
 
 android {
-   applicationId = "com.example.diwan_app" // يجب أن يطابق الـ namespace
-        minSdk = 21                             // لضمان عمله على الهواتف القديمة والجديدة
-        targetSdk = 34                          // يجب أن يطابق الـ compileSdk
+    // هذا السطر مهم جداً لتعريف هوية التطبيق
+    namespace = "com.example.diwan_app" 
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.example.diwan_app"
+        // استخدمي أرقاماً صريحة هنا لضمان عدم وجود أخطاء في التعاريف
+        minSdk = 21 
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -19,19 +26,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
-    defaultConfig {
-        applicationId = "com.example.diwan_app"
-        minSdk = flutter.minSdkVersion
-        targetSdk = 34
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        jvmTarget = "17"
     }
 
     buildTypes {
         release {
+            // ملاحظة: في النسخة النهائية سنغير هذا لإعدادات الـ Signing الحقيقية
             signingConfig = signingConfigs.getByName("debug")
         }
     }
