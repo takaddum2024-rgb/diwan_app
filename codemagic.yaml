@@ -9,19 +9,14 @@ workflows:
     scripts:
       - name: Set up local.properties
         script: |
-          # هذا السطر يحل مشكلة المسارات في السيرفر
+          # هذا السطر هو الحل! سيقوم بكتابة المسار الصحيح للسيرفر
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
       - name: Get Flutter packages
         script: |
           flutter pub get
       - name: Build Android APK
         script: |
-          # تنظيف شامل وبناء النسخة النهائية
           flutter clean
           flutter build apk --release --no-tree-shake-icons --ignore-deprecation
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
-    publishing:
-      email:
-        recipients:
-          - YOUR_EMAIL@example.com # يمكنكِ وضع إيميلك هنا لتصلكِ الروابط
