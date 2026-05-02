@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // إضافة هذا السطر ليعرف Gradle مكان إضافة Flutter
+        classpath "dev.flutter:flutter-gradle-plugin:1.0.0"
+    }
+}
+
 allprojects {
     repositories {
         google()
