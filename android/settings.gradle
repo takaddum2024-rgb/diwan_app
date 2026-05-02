@@ -1,24 +1,13 @@
 pluginManagement {
-    // محاولة قراءة من local.properties إذا كان موجوداً (للتطوير المحلي)
-    def flutterSdkPathFromProps = null
-    def localPropsFile = file("local.properties")
-    if (localPropsFile.exists()) {
-        def properties = new Properties()
-        localPropsFile.withInputStream { properties.load(it) }
-        flutterSdkPathFromProps = properties.getProperty("flutter.sdk")
-    }
+    // استخدام متغير البيئة مباشرة
+    def flutterSdkPath = System.getenv('FLUTTER_ROOT')
     
-    // استخدام متغير البيئة إذا لم يتم العثور على المسار في local.properties
-    def flutterSdkPath = flutterSdkPathFromProps ?: System.getenv('FLUTTER_ROOT')
-    
-    // إذا كان لا يزال فارغاً، استخدم مساراً افتراضياً لـ GitHub Actions
-    if (flutterSdkPath == null) {
+    // المسار الافتراضي لـ GitHub Actions إذا لم يتم تعيين المتغير
+    if (flutterSdkPath == null || flutterSdkPath.isEmpty()) {
         flutterSdkPath = "/opt/hostedtoolcache/flutter/stable-stable/stable"
-        println "WARNING: Using default Flutter SDK path for CI: ${flutterSdkPath}"
     }
     
-    settings.ext.flutterSdkPath = flutterSdkPath
-    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
+    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
         google()
@@ -34,4 +23,3 @@ plugins {
 }
 
 include ":app"
-apply from: "${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle/app_plugin_loader.gradle"
