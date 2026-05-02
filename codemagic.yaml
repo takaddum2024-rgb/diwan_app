@@ -1,23 +1,16 @@
-workflows:
-  android-workflow:
-    name: Diwan App Build
-    instance_type: mac_mini_m1
-    max_build_duration: 60
-    environment:
-      flutter: stable
-      java: 17
-    scripts:
-      - name: Prepare Android Environment
+scripts:
+      - name: Configure Flutter SDK Path
         script: |
+          # هذه الأسطر تضمن أن السيرفر يعرف مكان Flutter بدقة 100%
           mkdir -p android
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
-      - name: Get Dependencies
+          
+          # إجبار Gradle على رؤية التغييرات
+          export GRADLE_OPTS="-Dorg.gradle.project.flutter.sdk=$FLUTTER_ROOT"
+      - name: Get dependencies
         script: |
           flutter pub get
-      - name: Build Release APK
+      - name: Build Android APK
         script: |
-          flutter clean
           flutter build apk --release --no-tree-shake-icons
-    artifacts:
-      - build/app/outputs/flutter-apk/*.apk
