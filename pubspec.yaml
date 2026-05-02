@@ -1,0 +1,40 @@
+name: diwan_app
+description: تطبيق ديوان القصائد
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  # المكتبات الأساسية (تم تصحيح مكانها وتنسيقها)
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  
+  # حزمة الصوت
+  audioplayers: ^5.2.1
+  
+  # باقي الحزم
+  provider: ^6.0.5
+  shared_preferences: ^2.2.0
+  printing: ^5.11.0
+  pdf: ^3.10.4
+  share_plus: ^7.2.1
+  file_picker: ^5.5.0
+  url_launcher: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  build_runner: ^2.4.1  # تأكد أن هذا السطر يبدأ بمسافتين فقط
+ 
+flutter:
+  uses-material-design: true
+  # إذا كان لديك صور أو خطوط، تأكد من إضافة قسم assets هنا لاحقاً
