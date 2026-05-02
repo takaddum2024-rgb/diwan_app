@@ -7,15 +7,22 @@ workflows:
       flutter: stable
       java: 17
     scripts:
-      - name: Set up local.properties
+      - name: Prepare local.properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+          echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
       - name: Get Flutter packages
         script: |
           flutter pub get
       - name: Build Android APK
         script: |
-          # تنظيف وبناء
-          flutter build apk --release --no-tree-shake-icons --ignore-deprecation
+          flutter clean
+          # بناء الـ APK مع توضيح المسار
+          flutter build apk --release --no-tree-shake-icons
+      - name: Inspect output directory
+        script: |
+          # هذا السطر سيظهر لنا في السجلات أين وضع Flutter الملف بالضبط
+          find build/app/outputs -name "*.apk"
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
+      # بحث شامل في كل المجلدات المحتملة للـ APK
+      - build/app/outputs/**/*.apk
