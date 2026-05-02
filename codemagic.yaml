@@ -2,17 +2,26 @@ workflows:
   android-workflow:
     name: Android APK Build
     max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+      java: 17
     scripts:
       - name: Set up local.properties
         script: |
+          # هذا السطر يحل مشكلة المسارات في السيرفر
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
       - name: Get Flutter packages
         script: |
           flutter pub get
       - name: Build Android APK
         script: |
-          # إضافة أمر clean ضروري جداً هنا
+          # تنظيف شامل وبناء النسخة النهائية
           flutter clean
           flutter build apk --release --no-tree-shake-icons --ignore-deprecation
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
+    publishing:
+      email:
+        recipients:
+          - YOUR_EMAIL@example.com # يمكنكِ وضع إيميلك هنا لتصلكِ الروابط
