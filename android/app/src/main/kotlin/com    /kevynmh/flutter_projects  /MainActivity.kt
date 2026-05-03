@@ -1,4 +1,4 @@
-package com.kevynmh.flutter_projects
+package com.example.diwan_app
 
 import io.flutter.embedding.android.FlutterActivity
 
