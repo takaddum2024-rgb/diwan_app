@@ -1,20 +1,12 @@
-workflows:
-  flutter-workflow:
-    name: Flutter Build
-    max_build_duration: 60
-
-    environment:
-      flutter: stable
-
-    scripts:
-      - name: Clean project
-        script: flutter clean
-
-      - name: Get dependencies
-        script: flutter pub get
-
+scripts:
+      - name: Setup local.properties
+        script: |
+          mkdir -p android
+          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+          echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
+      - name: Get packages
+        script: |
+          flutter pub get
       - name: Build APK
-        script: flutter build apk --release
-
-    artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+        script: |
+          flutter build apk --release --no-tree-shake-icons
